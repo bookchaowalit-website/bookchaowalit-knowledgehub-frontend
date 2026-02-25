@@ -1,0 +1,115 @@
+---
+title: About This Knowledge Hub
+description: Learn about the purpose and features of this personal knowledge management system
+date: 2026-02-20
+tags: [about, documentation, knowledge-management]
+---
+
+# About This Knowledge Hub
+
+This is my personal knowledge hub built with Next.js and MDX. It's designed to help me organize and share my thoughts, ideas, and knowledge across different categories.
+
+## Purpose
+
+The hub serves as a centralized platform for:
+
+- **Personal Diary**: Recording daily thoughts and experiences
+- **Knowledge Articles**: Documenting learnings and technical knowledge
+- **Documentation**: Creating guides and reference materials
+- **Ideas**: Brainstorming and tracking project concepts
+
+## Features
+
+### 1. Content Organization
+- Categorized content management
+- Tag-based organization
+- Search functionality
+- Date-based sorting
+
+### 2. Technical Stack
+- **Next.js 14** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **MDX** for mixed content and code
+- **Gray Matter** for frontmatter parsing
+- **Lucide React** for icons
+
+### 3. Content Management
+- MDX files stored in organized directories
+- Frontmatter metadata
+- Rich text support
+- Code highlighting capabilities
+
+## Structure
+
+```
+├── content/
+│   ├── diary/          # Personal journal entries
+│   ├── knowledge/      # Technical knowledge and tutorials
+│   ├── docs/           # Documentation and guides
+│   └── ideas/          # Project ideas and concepts
+├── lib/
+│   └── mdx.ts         # MDX utility functions
+└── app/
+    ├── api/mcp/        # MCP API endpoints
+    ├── page.tsx        # Homepage
+    └── [category]/     # Dynamic category routes
+```
+
+## How to Use
+
+### Adding New Content
+
+1. Create a new MDX file in the appropriate category folder
+2. Add frontmatter metadata
+3. Write your content using Markdown and JSX
+
+Example frontmatter:
+```yaml
+---
+title: My New Article
+description: A brief description of the article
+date: 2026-02-22
+tags: [tag1, tag2, tag3]
+---
+```
+
+### Viewing Content
+
+- Navigate to categories using the menu
+- Use the search function to find specific content
+- Click on entries to view detailed pages
+
+## Technology Choices
+
+### Why Next.js?
+- Excellent React support
+- Built-in routing system
+- Static site generation capabilities
+- API routes for backend functionality
+- Great developer experience
+
+### Why MDX?
+- Combines Markdown with JSX
+- Component-based content
+- Code highlighting
+- Rich media support
+
+### Why Tailwind CSS?
+- Utility-first CSS framework
+- Rapid development
+- Customizable design system
+- Responsive by default
+
+## Future Enhancements
+
+- Dark mode support
+- Full-text search
+- Tag-based filtering
+- Category management interface
+- Version history for content
+- Export functionality
+
+---
+
+This knowledge hub is an evolving project that grows with my learning and development journey. Feel free to explore the different sections and contribute if you have suggestions!

@@ -1,0 +1,151 @@
+---
+title: Getting Started with Next.js
+description: A comprehensive guide to Next.js fundamentals and best practices
+date: 2026-02-21
+tags: [nextjs, react, web-development, javascript]
+---
+
+# Getting Started with Next.js
+
+Next.js is a powerful React framework that enables server-side rendering, static site generation, and many other features out of the box.
+
+## What is Next.js?
+
+Next.js is an open-source React framework created by Vercel that provides:
+
+- **Server-Side Rendering (SSR)** - Improved SEO and performance
+- **Static Site Generation (SSG)** - Fast loading times
+- **API Routes** - Backend functionality
+- **Image Optimization** - Automatic image optimization
+- **CSS Support** - CSS Modules, Sass, Tailwind CSS
+- **TypeScript Support** - Built-in TypeScript support
+
+## Core Concepts
+
+### 1. File System Routing
+
+Next.js uses file-based routing. Each file in the `app` directory becomes a route:
+
+```
+app/
+├── page.tsx          # /
+├── about/
+│   └── page.tsx     # /about
+└── blog/
+    ├── page.tsx      # /blog
+    └── [slug]/
+        └── page.tsx  # /blog/:slug
+```
+
+### 2. Layouts and Templates
+
+Layouts are used to share UI between pages:
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+### 3. Data Fetching
+
+Next.js provides multiple ways to fetch data:
+
+```tsx
+// Static Generation at build time
+export async function getStaticProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+
+// Server-side rendering
+export async function getServerSideProps() {
+  const data = await fetchData();
+  return { props: { data } };
+}
+
+// Client-side fetching
+const [data, setData] = useState(null);
+useEffect(() => {
+  fetch('/api/data')
+    .then(res => res.json())
+    .then(setData);
+}, []);
+```
+
+## Features
+
+### Image Optimization
+
+Next.js automatically optimizes images:
+
+```tsx
+import Image from 'next/image';
+
+function MyComponent() {
+  return (
+    <Image
+      src="/hero.jpg"
+      alt="Hero"
+      width={800}
+      height={600}
+      priority
+    />
+  );
+}
+```
+
+### API Routes
+
+Create backend endpoints:
+
+```tsx
+// app/api/hello/route.ts
+export async function GET(request: Request) {
+  return new Response(JSON.stringify({ message: 'Hello World' }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+```
+
+### Middleware
+
+```tsx
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
+  response.cookies.set('cookie-name', 'cookie-value');
+  return response;
+}
+```
+
+## Best Practices
+
+1. **Use TypeScript** for type safety
+2. **Implement proper error boundaries** to handle errors gracefully
+3. **Optimize images** using Next.js Image component
+4. **Use static generation** when possible for better performance
+5. **Structure your app** with proper folder organization
+6. **Implement proper SEO** with metadata
+
+## Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://reactjs.org/docs)
+- [Vercel Platform](https://vercel.com)
+
+---
+
+This guide provides a solid foundation for building applications with Next.js. Happy coding!
