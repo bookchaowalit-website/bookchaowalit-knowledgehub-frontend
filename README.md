@@ -177,3 +177,9 @@ No environment variables are required for basic functionality.
 ## License
 
 This project is private and intended for personal use.
+
+## Related
+
+- **Mobile App:** [bookchaowalit-knowledgehub-mobile](https://github.com/bookchaowalit-mobile/bookchaowalit-knowledgehub-mobile)
+- **Portfolio:** [bookchaowalit.com](https://bookchaowalit.com)
+
