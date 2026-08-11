@@ -5,8 +5,9 @@ import { ArrowLeft } from 'lucide-react';
 import { remark } from 'remark';
 import remarkMdx from 'remark-mdx';
 
-export default async function IdeaEntryPage({ params }: { params: { slug: string } }) {
-  const entry = getEntryBySlug('ideas', params.slug);
+export default async function IdeaEntryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const entry = getEntryBySlug('ideas', slug);
 
   if (!entry) {
     notFound();

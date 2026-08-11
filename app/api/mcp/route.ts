@@ -6,7 +6,8 @@ export async function POST(request: NextRequest) {
 
   try {
     const body = await request.json();
-    const { method, params } = body;
+    const { method, params, id } = body;
+    requestId = id ?? 0;
 
     let result;
 

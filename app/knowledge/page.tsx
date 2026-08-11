@@ -1,7 +1,6 @@
 import { getEntries } from '@/lib/mdx';
 import Link from 'next/link';
 import { Book, ArrowLeft } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
 export default function KnowledgePage() {
   const entries = getEntries('knowledge');

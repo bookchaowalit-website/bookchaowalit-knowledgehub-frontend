@@ -1,7 +1,6 @@
 import { getEntries } from '@/lib/mdx';
 import Link from 'next/link';
 import { Lightbulb, ArrowLeft } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
 export default function IdeasPage() {
   const entries = getEntries('ideas');

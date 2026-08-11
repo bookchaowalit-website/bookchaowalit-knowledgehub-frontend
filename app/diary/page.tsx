@@ -1,7 +1,6 @@
 import { getEntries } from '@/lib/mdx';
 import Link from 'next/link';
 import { Calendar, ArrowLeft } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
 export default function DiaryPage() {
   const entries = getEntries('diary');

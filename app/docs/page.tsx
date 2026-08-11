@@ -1,7 +1,6 @@
 import { getEntries } from '@/lib/mdx';
 import Link from 'next/link';
 import { FileText, ArrowLeft } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
 export default function DocsPage() {
   const entries = getEntries('docs');

@@ -5,8 +5,9 @@ import { ArrowLeft } from 'lucide-react';
 import { remark } from 'remark';
 import remarkMdx from 'remark-mdx';
 
-export default async function DiaryEntryPage({ params }: { params: { slug: string } }) {
-  const entry = getEntryBySlug('diary', params.slug);
+export default async function DiaryEntryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const entry = getEntryBySlug('diary', slug);
 
   if (!entry) {
     notFound();
