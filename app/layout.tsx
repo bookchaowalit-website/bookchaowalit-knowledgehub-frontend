@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,8 +69,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Analytics />
-        <SpeedInsights />
+        {/* THESIS: make personal knowledge feel findable and worth returning to.
+OWN-WORLD: an unbleached paper archive with a blue index rail, red filing marks, and editorial serif moments.
+STORY: arrive at the collection, choose a shelf, scan the filing rows, then open one record into a quiet reading room.
+FIRST VIEWPORT: the archive promise, record count, shelf index, and search all appear before the first filing row.
+FORM: use ruled rows, typographic scale, and shelf marks as the navigation grammar; no generic dashboard chrome.
+SEED: fb5631de · assigned direction 4 · read mode.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance */}
         {children}
       </body>
     </html>

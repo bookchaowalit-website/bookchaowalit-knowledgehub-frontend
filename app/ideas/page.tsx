@@ -59,7 +59,7 @@ export default function IdeasPage() {
                   <p className="text-gray-600 mb-4">{entry.frontmatter.description}</p>
                 )}
 
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                  <div className="bg-yellow-50 border-t-2 border-yellow-400 p-4 mb-4">
                   <p className="text-sm text-gray-700">
                     {entry.content.substring(0, 150)}...
                   </p>
