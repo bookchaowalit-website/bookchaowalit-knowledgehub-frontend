@@ -1,0 +1,31 @@
+---
+title: "Proposal: versioned browser-storage snapshots"
+description: "A bounded design for restoring a known record shape instead of trusting any JSON array."
+date: "2026-10-15"
+tags: ["proposal", "validation", "localStorage"]
+---
+
+# Proposal: versioned browser-storage snapshots
+
+This proposal addresses a boundary: saved JSON can be old, edited manually or left by a previous application version. Successful JSON parsing alone does not establish the shape that a page expects.
+
+## A possible envelope
+~~~json
+{
+  "version": 1,
+  "items": [
+    { "id": "sample", "text": "Synthetic example", "createdAt": 1, "pinned": false }
+  ]
+}
+~~~
+
+A reader would first verify the envelope version, then validate each required record field. A timestamp should be finite and displayable. An identifier should be a string with a defined uniqueness rule. Invalid records could be dropped only when the product explicitly accepts partial recovery.
+
+## Decisions to make
+Choose whether an unsupported version produces an empty archive, preserves the old raw value for manual recovery, or invokes a reviewed migration. Do not overwrite unrecognized data before making that decision visible to the user.
+
+Test a valid snapshot, corrupt JSON, an unknown version, duplicate identifiers, denied reads and quota failures. Exercise the actual storage adapter so a serialization-only test cannot claim persistence.
+
+This document proposes a design; it does not assert that versioned snapshots or migrations exist in the current app. Browser storage is not a suitable place for credentials or a durable backup strategy.
+
+Reference: [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).

@@ -1,0 +1,28 @@
+---
+title: "Copy before sorting shared state"
+description: "A tiny example distinguishes a new array from the objects that the array still shares."
+date: "2026-10-15"
+tags: ["arrays", "immutability", "sorting"]
+---
+
+# Copy before sorting shared state
+
+A list may be used by both an editor and a sorted view. Sorting the editor's array in place gives the view an unexpected way to reorder the source.
+
+## Separate order from stored state
+~~~js
+const source = [{ id: "b", rank: 2 }, { id: "a", rank: 1 }];
+const ordered = [...source].sort((a, b) => a.rank - b.rank);
+console.log(source.map(row => row.id).join(",")); // b,a
+console.log(ordered.map(row => row.id).join(",")); // a,b
+console.log(source[0] === ordered[1]); // true
+~~~
+
+The spread creates a new array, so sorting it changes only that array's ordering. The objects remain shared. Assigning to a nested object through the sorted view would still affect the source object.
+
+## Choose the assertion
+Test both the returned order and the original order. If an operation also changes a row, create a replacement object for that row instead of editing the shared object. A shallow copy is enough for ordering; it is not a general deep-copy operation.
+
+For ties, define the intended order and use a comparator consistent with it. Avoid a comparator that returns only a boolean, because the sorting contract expects negative, zero or positive results.
+
+Reference: [Array.prototype.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).

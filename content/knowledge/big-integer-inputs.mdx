@@ -1,0 +1,28 @@
+---
+title: "Keep large integer input out of floating point"
+description: "A worked example preserves a large decimal integer through binary and hexadecimal representations."
+date: "2026-10-15"
+tags: ["BigInt", "integers", "conversion"]
+---
+
+# Keep large integer input out of floating point
+
+When an input is an integer identifier or exact counter, parsing it through a floating-point Number can change its value before any formatting starts. The Number safe-integer limit is a useful boundary to test.
+
+## Preserve the original decimal text
+~~~js
+const raw = "9007199254740993";
+const integer = BigInt(raw);
+console.log(integer.toString(10)); // 9007199254740993
+console.log(Number(raw).toString()); // 9007199254740992
+console.log(BigInt("0x" + integer.toString(16)) === integer); // true
+~~~
+
+The comparison demonstrates two distinct contracts: Number is useful for general numerical calculations, while BigInt represents integers without the same fixed safe-integer bound. Do not insert a Number conversion between the input string and BigInt.
+
+## Validate the input language
+A converter should say which digits and prefixes it accepts. A decimal-only input can be checked against a signed decimal pattern before parsing. Decimal fractions are not integers; hexadecimal letters are not decimal digits. Returning an error is clearer than silently keeping a valid prefix and discarding the rest.
+
+BigInt values also need an explicit serialization choice. For public JSON examples, use a decimal string and document that choice rather than assuming the default JSON serializer accepts BigInt.
+
+Reference: [BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).

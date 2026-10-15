@@ -1,0 +1,30 @@
+---
+title: "Public lab note: persistence needs a second read"
+description: "A small storage experiment separates serialization from a write-and-read persistence claim."
+date: "2026-10-15"
+tags: ["public-lab", "storage", "testing"]
+---
+
+# Public lab note: persistence needs a second read
+
+A JSON string demonstrates serialization. A persistence claim also needs a write to a storage boundary and a fresh read through that boundary. This public lab note uses invented, nonsensitive records; it is an experiment recipe rather than a report of personal activity.
+
+## Reproduce the boundary
+~~~js
+const values = Object.create(null);
+const storage = {
+  getItem(key) { return values[key] ?? null; },
+  setItem(key, value) { values[key] = value; }
+};
+const save = rows => storage.setItem("example:rows", JSON.stringify(rows));
+const load = () => JSON.parse(storage.getItem("example:rows") ?? "[]");
+save([{ id: "sample", done: true }]);
+console.log(load()); // [{ id: "sample", done: true }]
+~~~
+
+The fresh call to `load` does not reuse the original array. Delete the `setItem` call and the result becomes an empty array. That change is a useful way to check whether the experiment is testing a real boundary.
+
+## Limits to record
+This stub does not establish browser quota behavior, cross-tab updates or survival after a browser restart. A browser test is needed for those claims. Production readers should also validate the restored shape and recover when storage access or JSON parsing fails.
+
+Reference: [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).

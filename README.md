@@ -1,11 +1,11 @@
 # Knowledge Hub Next.js
 
-A personal knowledge management system built with Next.js, MDX, and Tailwind CSS. This hub helps organize thoughts, knowledge, and ideas across different categories.
+A curated public technical reading room built with Next.js, Markdown entries and Tailwind CSS. The content is authored for public use, with synthetic examples and explicit source links.
 
 ## Features
 
 - **Content Organization**: Categorized content (Diary, Knowledge, Docs, Ideas)
-- **MDX Support**: Write content with Markdown and JSX components
+- **Markdown entries**: MDX filenames hold Markdown bodies rendered with remark-html
 - **Search Functionality**: Search across all entries
 - **Responsive Design**: Mobile-friendly interface with Tailwind CSS
 - **MCP API**: RESTful API for accessing content programmatically
@@ -51,7 +51,7 @@ tags: [tag1, tag2, category]
 
 ### Categories
 
-- **Diary**: Personal thoughts and experiences
+- **Diary**: Intentionally public lab notes; personal reflections require explicit owner review.
 - **Knowledge**: Technical learnings and tutorials
 - **Docs**: Guides and reference materials
 - **Ideas**: Project concepts and brainstorming
@@ -84,7 +84,7 @@ tags: [tag1, tag2, category]
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 22+ for the built-in TypeScript test runner
 - npm or yarn
 
 ### Installation
@@ -176,7 +176,7 @@ No environment variables are required for basic functionality.
 
 ## License
 
-This project is private and intended for personal use.
+This repository uses the Apache-2.0 license; see LICENSE. Public entries follow the separate publication policy below.
 
 ## Notes from a recent audit pass
 
@@ -224,3 +224,23 @@ every page view.
 - **Mobile App:** [bookchaowalit-knowledgehub-mobile](https://github.com/bookchaowalit-mobile/bookchaowalit-knowledgehub-mobile)
 - **Portfolio:** [bookchaowalit.com](https://bookchaowalit.com)
 
+
+## Public content and verification
+
+The 12 entries are a hand-curated public collection across four categories.
+Follow [the publication policy](content/docs/publication-policy.mdx) before
+release: private diaries and raw transcripts are never imported or automatically
+exported. Use synthetic examples and obtain explicit owner review of the final
+public draft. Preparing these files does not authorize their production release.
+
+~~~bash
+npm ci
+npm test
+npm run lint
+npm run typecheck
+npm run build
+~~~
+
+Tests exercise the actual content loader, search and shared Markdown renderer.
+Entry bodies support Markdown headings, lists, links and fenced code; adding
+executable MDX components requires a separate renderer review.

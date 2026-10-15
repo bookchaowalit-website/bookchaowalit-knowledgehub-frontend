@@ -1,0 +1,29 @@
+---
+title: "Public lab note: a rounded value is a lossy interface"
+description: "A small numerical example explains why a round-trip test needs a stated precision contract."
+date: "2026-10-15"
+tags: ["public-lab", "numbers", "testing"]
+---
+
+# Public lab note: a rounded value is a lossy interface
+
+This reproducible numerical note uses synthetic values. It records an arithmetic observation without presenting it as a personal milestone, production incident or customer result.
+
+## Run the example
+~~~js
+const original = 1 / 3;
+const shown = Math.round(original * 100) / 100;
+const restored = Number(String(shown));
+console.log(shown); // 0.33
+console.log(Math.abs(restored - original) < 0.005); // true
+console.log(restored === original); // false
+~~~
+
+The string conversion did not cause the initial loss. Rounding to two decimal places did. Testing exact identity after the display step would demand information that the displayed value no longer contains.
+
+## Write the useful assertion
+Specify where rounding happens and express tolerance in the output unit. For this small input rounded to two decimal places, half of one hundredth is a useful error scale. Keep exact reference examples as well, because a very wide tolerance can hide an incorrect formula.
+
+This experiment does not establish a universal tolerance for color conversion, currency, measurement equipment or accumulated calculations. Each domain needs its own contract. Keep full precision internally when the display alone needs rounding.
+
+Reference: [Number.EPSILON and precision](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON).

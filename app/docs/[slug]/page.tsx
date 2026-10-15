@@ -2,8 +2,7 @@ import { getEntryBySlug } from '@/lib/mdx';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { remark } from 'remark';
-import remarkMdx from 'remark-mdx';
+import { renderEntry } from '@/lib/render-entry';
 
 export default async function DocEntryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -13,11 +12,7 @@ export default async function DocEntryPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const processedContent = await remark()
-    .use(remarkMdx)
-    .process(entry.content);
-
-  const contentHtml = processedContent.toString();
+  const contentHtml = await renderEntry(entry.content);
 
   return (
     <div className="min-h-screen bg-gray-50">

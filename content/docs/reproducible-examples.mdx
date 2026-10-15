@@ -1,0 +1,31 @@
+---
+title: "Write a reproducible example with an explicit limit"
+description: "A practical recipe for a small executable example, expected output and a truthful statement of scope."
+date: "2026-10-15"
+tags: ["examples", "testing", "documentation"]
+---
+
+# Write a reproducible example with an explicit limit
+
+A useful technical example lets another reader distinguish a verified result from an intended result. Keep its dependencies, inputs and expected outcome close together.
+
+## A complete small example
+Save the following as `example.mjs` and run `node example.mjs` in a Node runtime. It uses only the built-in assertion module.
+
+~~~js
+import assert from "node:assert/strict";
+function active(rows) { return rows.filter(row => !row.done); }
+const input = [{ id: "open", done: false }, { id: "closed", done: true }];
+assert.deepEqual(active(input).map(row => row.id), ["open"]);
+assert.equal(input.length, 2);
+console.log("example passed");
+~~~
+
+The first assertion checks the returned behavior. The second checks a property that an accidental destructive implementation could break. Readers can change the inputs without needing a service account or a private dataset.
+
+## Record what remains unknown
+This example establishes only a small filtering behavior. It does not exercise an interface, browser storage, network errors or accessibility. Add separate checks for those boundaries when a claim depends on them.
+
+Include a counterexample when it changes the decision: an empty list, an invalid record or an unavailable dependency. Avoid mock-only assertions that would still pass after removing the real operation.
+
+Reference: [Node.js assertion module](https://nodejs.org/api/assert.html).
